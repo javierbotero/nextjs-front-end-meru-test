@@ -2,6 +2,7 @@
 import { Providers } from "@/lib/providers"
 import Link from 'next/link'
 import ImportProducts from '@/components/ImportProducts'
+import Notifications from '@/components/Notifications'
 
 /* Instruments */
 
@@ -15,6 +16,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
               <li><Link href='/'>Productos</Link></li>
             </ul>
           </header>
+          <Notifications />
           <ImportProducts />
           <main className="">{props.children}</main>
         </body>

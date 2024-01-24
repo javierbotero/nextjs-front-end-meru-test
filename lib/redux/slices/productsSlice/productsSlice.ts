@@ -2,7 +2,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 /* Instruments */
-import { fetchProductsAsync, addProductAsync } from "./thunks";
+import {
+  fetchProductsAsync,
+  addProductAsync,
+  deleteProductAsync,
+  editProductAsync
+} from "./thunks";
 
 const initialState: ProductsSliceState = {
   value: [],
@@ -34,6 +39,29 @@ export const productsSlice = createSlice({
       .addCase(addProductAsync.fulfilled, (state, action) => {
         if (action.payload) {
           state.value.push(action.payload)
+        }
+        state.status = "idle";
+      })
+      .addCase(editProductAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(editProductAsync.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.value = state.value.map(product => {
+            if (product.id === action.payload.id) {
+              return action.payload
+            }
+            return product
+          })
+        }
+        state.status = "idle";
+      })
+      .addCase(deleteProductAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteProductAsync.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.value = state.value.filter(product => product.id !== action.payload)
         }
         state.status = "idle";
       })

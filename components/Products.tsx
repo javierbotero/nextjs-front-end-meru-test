@@ -9,8 +9,7 @@ import {
 } from '@/lib/redux'
 import Link from 'next/link'
 import Form from '@/components/Form'
-import { localFetch } from '@/lib/helpers/localFetch'
-import { API_URL } from '@/lib/helpers/utilities'
+import Product from '@/components/Product'
 
 import type { Product } from '@/lib/redux'
 
@@ -19,12 +18,7 @@ export default function Products () {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts).map(product => {
     return (
-      <li key={product.id}>
-        <h2>{product.name}</h2>
-        <p>{product.description}</p>
-        <p>{product.price}</p>
-        <Link href={`/${product.id}`}>Editar</Link>
-      </li>
+      <Product product={product} />
     )
   })
   const onSubmitCreate = async (product: Product) => {
@@ -40,7 +34,7 @@ export default function Products () {
         ? <Form name='' description='' price={0} onSubmit={onSubmitCreate} />
         : <button onClick={() => setShowFormCreate(true)}>Crea un Producto</button>}
       </div>
-      <h3>Products</h3>
+      <h3>Productos</h3>
       <div>{products}</div>
     </div>
   )

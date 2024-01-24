@@ -29,3 +29,29 @@ export const addProductAsync = createAppAsyncThunk(
     return data
   },
 )
+
+export const editProductAsync = createAppAsyncThunk(
+  "counter/editProduct",
+  async (product: Product) => {
+    const response = await localFetch(
+      `${API_URL}/products/${product.id}`, 'PUT', {}, { product }
+    )
+    const data = await response.json()
+    checkResponse(data)
+
+    return data
+  },
+)
+
+export const deleteProductAsync = createAppAsyncThunk(
+  "counter/deleteProduct",
+  async (product: Product) => {
+    const response = await localFetch(
+      `${API_URL}/products/${product.id}`, 'DELETE'
+    )
+    const data = await response.json()
+    checkResponse(data)
+
+    return product.id
+  },
+)

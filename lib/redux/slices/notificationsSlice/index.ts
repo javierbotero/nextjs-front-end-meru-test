@@ -1,2 +1,2 @@
-export * from "./productsSlice";
 export * from "./notificationsSlice";
+export * from "./selectors";

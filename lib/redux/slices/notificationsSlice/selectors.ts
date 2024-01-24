@@ -4,7 +4,5 @@ import type { ReduxState } from "@/lib/redux";
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectProducts = (state: ReduxState) => state.products.value;
-export const selectProduct = (state: ReduxState, id: number) => {
-  return state.products.value.find(product => product.id === id)
-}
+export const selectError = (state: ReduxState) => state.notifications.error;
+export const selectMessage = (state: ReduxState) => state.notifications.message;
