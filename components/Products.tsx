@@ -11,7 +11,7 @@ import Link from 'next/link'
 import Form from '@/components/Form'
 import Product from '@/components/Product'
 
-import type { Product } from '@/lib/redux'
+import type { Product as ProductType } from '@/lib/redux'
 
 export default function Products () {
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false)
@@ -21,9 +21,11 @@ export default function Products () {
       <Product product={product} />
     )
   })
-  const onSubmitCreate = async (product: Product) => {
+  const onSubmitCreate = async (product: ProductType) => {
     const result = await dispatch(addProductAsync(product))
-    if (result.type.match(/fulfilled/)) { setShowFormCreate(false) }
+    if (result.type.match(/fulfilled/)) {
+      setShowFormCreate(false)
+    }
   }
 
   return (

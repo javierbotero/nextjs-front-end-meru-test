@@ -24,7 +24,6 @@ export default function EditForm (
     const result = await dispatch(editProductAsync(product))
     if (result.type.match(/fulfilled/)) {
       setSent(true)
-      dispatch(notificationMessage('Producto editado exitosamente'))
     }
   }
 
