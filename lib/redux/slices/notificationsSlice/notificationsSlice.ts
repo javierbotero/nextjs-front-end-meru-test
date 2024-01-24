@@ -15,7 +15,7 @@ export const notificationsSlice = createSlice({
       state.error = action.payload;
     },
     notificationMessage: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
+      state.message = action.payload;
     },
     cleanError: (state) => { state.error = '' },
     cleanMessage: (state) => { state.message = '' }

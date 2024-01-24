@@ -1,7 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
-import { useSelector, selectProduct, useDispatch, editProductAsync } from '@/lib/redux'
+import {
+  useSelector,
+  selectProduct,
+  useDispatch,
+  editProductAsync,
+  notificationMessage
+} from '@/lib/redux'
 import Form from '@/components/Form'
 import Link from 'next/link'
 
@@ -18,6 +24,7 @@ export default function EditForm (
     const result = await dispatch(editProductAsync(product))
     if (result.type.match(/fulfilled/)) {
       setSent(true)
+      dispatch(notificationMessage('Producto editado exitosamente'))
     }
   }
 
