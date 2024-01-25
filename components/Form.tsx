@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import FieldForm from './FieldForm'
+import { notificationError, useDispatch, notificationMessage } from '@/lib/redux'
 
 type Inputs = {
   name: string
@@ -13,6 +14,7 @@ export default function Form (
   { name: string, description: string, price: number, onSubmit: any }
 ): JSX.Element {
   const [sent, setSent] = useState<boolean>(false)
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -22,14 +24,19 @@ export default function Form (
 
   const onSubmitForm: SubmitHandler<Inputs> = async (data) => {
     const result = await onSubmit(data)
-    if (result) { setSent(true) }
+    if (result) {
+      setSent(true)
+      dispatch(notificationMessage('Enviado exitosamente'))
+    } else {
+      dispatch(notificationError('Error inesperado, intenta mas tarde!'))
+    }
   }
 
   return (
-    <div>
+    <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
       {sent
       ? <div>Enviado exitosamente</div>
-      : <form onSubmit={handleSubmit(onSubmitForm)}>
+      : <form onSubmit={handleSubmit(onSubmitForm)} className='space-y-6'>
           <FieldForm
             label='Nombre'
             property='name'
@@ -72,7 +79,7 @@ export default function Form (
               }
             }
           />
-          <input type='submit' />
+          <input type='submit' className='btn w-full' />
         </form>
       }
     </div>

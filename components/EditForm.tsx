@@ -5,8 +5,7 @@ import {
   useSelector,
   selectProduct,
   useDispatch,
-  editProductAsync,
-  notificationMessage
+  editProductAsync
 } from '@/lib/redux'
 import Form from '@/components/Form'
 import Link from 'next/link'
@@ -24,6 +23,7 @@ export default function EditForm (
     const result = await dispatch(editProductAsync(product))
     if (result.type.match(/fulfilled/)) {
       setSent(true)
+      return true
     }
   }
 
@@ -39,9 +39,9 @@ export default function EditForm (
   return (
     <div>
       {sent
-      ? <div>
-          <div>Enviado Exitosamente</div>
-          <Link href='/'>Volver a la lista de productos</Link>
+      ? <div className='min-h-96 flex flex-col items-center'>
+          <div className='mt-auto mb-6'>Editado exitosamente</div>
+          <Link href='/' className='btn mb-auto'>Volver a la lista de productos</Link>
         </div>
       : form
       }

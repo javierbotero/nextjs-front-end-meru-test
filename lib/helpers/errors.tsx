@@ -5,18 +5,18 @@ export const showError = (
 ): JSX.Element | undefined => {
   if (errors.hasOwnProperty(property)
     && errorTypes.hasOwnProperty(errors[property].type)) {
-    return <div>{errorTypes[errors[property].type]}</div>
+    return <div className='error'>{errorTypes[errors[property].type]}</div>
   }
 }
 
 export const showNotificationsError = (error: string) => {
   return error.length > 0
-    ? <div>{error}</div>
+    ? <div className='error'>{error}</div>
     : ''
 }
 
 export const showNotificationsMessage = (message: string) => {
   return message.length > 0
-    ? <div>{message}</div>
+    ? <div className='message'>{message}</div>
     : ''
 }

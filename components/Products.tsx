@@ -25,19 +25,25 @@ export default function Products () {
     const result = await dispatch(addProductAsync(product))
     if (result.type.match(/fulfilled/)) {
       setShowFormCreate(false)
+      return true
     }
   }
 
   return (
-    <div>
-      <h3>Create a Product</h3>
-      <div>
+    <div className='pb-20'>
+      <div className='min-h-40 flex justify-center items-center'>
         {showFormCreate
         ? <Form name='' description='' price={0} onSubmit={onSubmitCreate} />
-        : <button onClick={() => setShowFormCreate(true)}>Crea un Producto</button>}
+        : <button
+            onClick={() => setShowFormCreate(true)}
+            className='btn'
+          >Crea un Producto</button>}
       </div>
-      <h3>Productos</h3>
-      <div>{products}</div>
+      <div
+        className='mt-6 grid grid-cols-1
+          gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4
+          xl:gap-x-8'
+        >{products}</div>
     </div>
   )
 }
